@@ -1,6 +1,6 @@
 from flask import Flask
 
-UPLOAD_FOLDER = 'C:/Users/lakis/OneDrive/Desktop/FileUpload'
+UPLOAD_FOLDER = 'C:/Users/lakis/OneDrive/Desktop'
 
 app = Flask(__name__)
 app.secret_key = "secret key"

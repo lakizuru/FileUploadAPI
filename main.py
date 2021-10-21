@@ -4,7 +4,8 @@ from app import app
 from flask import Flask, request, redirect, jsonify
 from werkzeug.utils import secure_filename
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'])
+# File types allowed
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav', 'mp3', 'mp4', 'mkv'])
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -28,7 +29,8 @@ def upload_file():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		resp = jsonify({'message' : 'File successfully uploaded'})
+		filePath = app.config['UPLOAD_FOLDER'] + filename
+		resp = jsonify({'message' : 'File successfully uploaded', 'path': filePath})
 		resp.status_code = 201
 		return resp
 
